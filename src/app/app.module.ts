@@ -13,7 +13,6 @@ import { TitleComponent } from "./title/title.component";
 import { FourOFourComponent } from "./four-o-four/four-o-four.component";
 
 const appRoutes: Routes = [
-  { path: "login", component: AuthComponent },
   { path: "game", component: GameComponent },
   { path: "", component: AuthComponent },
   { path: "404", component: FourOFourComponent },
