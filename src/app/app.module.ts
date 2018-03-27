@@ -1,12 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { environment } from '../environments/environment';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { environment } from "../environments/environment";
 
-//Config Firebase 
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
+//Config Firebase
+import { AngularFirestoreModule } from "angularfire2/firestore";
+import { AngularFireStorageModule } from "angularfire2/storage";
+import { AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireModule } from "angularfire2";
 
 //Config Routing
 import { RouterModule, Routes } from "@angular/router";
@@ -37,7 +37,8 @@ const appRoutes: Routes = [
     ChatComponent,
     ProfilComponent,
     GameComponent,
-    TitleComponent
+    TitleComponent,
+    FourOFourComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +46,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFirestoreModule,
-    TitleComponent,
-    FourOFourComponent
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
