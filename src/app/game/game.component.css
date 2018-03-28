@@ -1,0 +1,55 @@
+.score_history {
+  position: absolute;
+  width: 20%;
+  text-align: center;
+  border: 1px solid black;
+  height: 50%;
+}
+
+.title {
+  position: absolute;
+  top: 0%;
+  left: 20%;
+  width: 60%;
+  text-align: center;
+  border: 1px solid black;
+  height: 15%;
+}
+
+.profil {
+  position: absolute;
+  left: 80%;
+  text-align: center;
+  border: 1px solid black;
+  height: 40%;
+  width: 20%;
+}
+
+.wall_fame {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  text-align: center;
+  border: 1px solid black;
+  height: 50%;
+  width: 20%;
+}
+.chat {
+  position: absolute;
+  left: 80%;
+  top: 95%;
+  text-align: center;
+  border: 1px solid black;
+  height: 5%;
+  width: 20%;
+}
+
+.game {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  text-align: center;
+  border: 1px solid black;
+  height: 50%;
+  width: 50%;
+}

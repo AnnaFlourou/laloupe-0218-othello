@@ -1,0 +1,21 @@
+.username {
+  font-weight: bold;
+  margin-top: 5%;
+}
+
+.avatar {
+  margin-top: 5%;
+}
+
+.lineHr {
+  height: 1px;
+  background-color: dimgrey;
+}
+
+.settings {
+  font-weight: bold;
+}
+.settings_menu {
+  margin-top: 10%;
+  font-weight: bold;
+}
