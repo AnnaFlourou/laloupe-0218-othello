@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'mans';
+  src: url('../../assets/fonts/font-mans/mans.ttf');
+}
+@font-face {
+  font-family: 'pacifico';
+  src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
+
+.title {
+  font-family: 'mans', Arial, Helvetica, sans-serif;
+  font-size: 11rem;
+  color: #3e2723;
+}
