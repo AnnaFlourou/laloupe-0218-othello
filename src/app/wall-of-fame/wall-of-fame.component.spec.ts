@@ -8,7 +8,7 @@ describe('WallOfFameComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WallOfFameComponent ]
+      declarations: [WallOfFameComponent],
     })
     .compileComponents();
   }));

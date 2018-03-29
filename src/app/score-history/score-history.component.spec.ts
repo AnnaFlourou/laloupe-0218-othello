@@ -8,7 +8,7 @@ describe('ScoreHistoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScoreHistoryComponent ]
+      declarations: [ScoreHistoryComponent],
     })
     .compileComponents();
   }));

@@ -1,61 +1,50 @@
 @font-face {
-    font-family: "pacifico";
-    src: url('../../assets/fonts/pacifico/pacifico.ttf');
+  font-family: 'pacifico';
+  src: url('../../assets/fonts/pacifico/pacifico.ttf');
 }
 
 @media (min-width: 768px) {
-    .my-custom-container{
-        width:600px;
-    }
+  .my-custom-container {
+    width: 600px;
+  }
 }
 
 @media (min-width: 992px) {
-    .my-custom-container{
-        width:720px;
-    }
+  .my-custom-container {
+    width: 720px;
+  }
 }
 
 @media (min-width: 1200px) {
-    .my-custom-container{
-        width:745px;
-    }
+  .my-custom-container {
+    width: 745px;
+  }
 }
-.all-auth{
-    border: 1px solid #00BFA5;
-    border-radius: 10px;
-    
-    background-color: #F5F5F5
-    ;
-    padding: 10px;
+.all-auth {
+  border: 1px solid #00bfa5;
+  border-radius: 10px;
+
+  background-color: #f5f5f5;
+  padding: 10px;
 }
-.auth-img{
-    width: 23%;
-    
+.auth-img {
+  width: 20%;
 }
-.all-auth p{
-    font-family: "pacifico";
-    font-size: 2.6rem;
+.all-auth p {
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
+  font-size: 2.6rem;
 }
 
 /*Button Google*/
-.my-custom-container{
-    text-align: center;
+.my-custom-container {
+  text-align: center;
 }
 /*footer*/
-.footer{
-    
-    font-family: "pacifico";
-    font-size: 1.8rem;
-}
-.footer span{
-    font-family: arial;
-    font-style: italic;
-    font-size: 1.5rem;
-}
-.footer p{
-    text-align: center;
+.footer {
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
 }
 
-.auth-img{
-    width: 20%;   
+.footer p {
+  text-align: center;
 }
