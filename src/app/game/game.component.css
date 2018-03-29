@@ -1,4 +1,5 @@
 .score_history {
+  background-color: rgb(120, 124, 143);
   position: absolute;
   width: 20%;
   text-align: center;
@@ -12,11 +13,11 @@
   left: 20%;
   width: 60%;
   text-align: center;
-  border: 1px solid black;
-  height: 15%;
+  height: 18%;
 }
 
 .profil {
+  background-color: rgb(120, 124, 143);
   position: absolute;
   left: 80%;
   text-align: center;
@@ -26,6 +27,7 @@
 }
 
 .wall_fame {
+  background-color: rgb(120, 124, 143);
   position: absolute;
   top: 50%;
   left: 0%;
@@ -35,6 +37,7 @@
   width: 20%;
 }
 .chat {
+  background-color: rgb(120, 124, 143);
   position: absolute;
   left: 80%;
   top: 95%;
@@ -46,10 +49,16 @@
 
 .game {
   position: absolute;
-  left: 25%;
-  top: 25%;
+  left: 28%;
+  top: 22%;
   text-align: center;
   border: 1px solid black;
-  height: 50%;
-  width: 50%;
+  height: 65%;
+  width: 45%;
+}
+
+.title_game {
+  margin-top: 35%;
+  font-weight: bold;
+  font-size: 2em;
 }
