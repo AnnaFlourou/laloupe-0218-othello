@@ -14,10 +14,10 @@
   </div>
   <div *ngIf="afAuth.authState | async as user; else showLogin">
     <h1>Hello {{ user.displayName }}!</h1>
-    <button (click)="logout()">Logout</button>
+    <button (click)="onLogout()">Logout</button>
   </div>
   <ng-template class="row mx-auto logButton" #showLogin>
-    <img (click)="login()" src='../../assets/images/btn-google.png' alt="btn-google" />
+    <img (click)="onLogin()" src='../../assets/images/btn-google.png' alt="btn-google" />
   </ng-template>
 </div>
 

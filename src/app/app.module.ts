@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
+import { RouterModule, Routes } from '@angular/router';
 
 // Config Firebase
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -8,9 +9,10 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 
-// Config Routing
-import { RouterModule, Routes } from '@angular/router';
+// Services
+import { AuthService } from './services/auth.service';
 
+// Config Routing
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
 import { ScoreHistoryComponent } from './score-history/score-history.component';
@@ -48,7 +50,7 @@ const appRoutes: Routes = [
     AngularFireStorageModule,
     AngularFirestoreModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

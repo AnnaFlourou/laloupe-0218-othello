@@ -1,29 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
-import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+  constructor(
+    public afAuth: AngularFireAuth,
+    private authService: AuthService,
+  ) {}
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-  }
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then( 
-    () => {
-      this.router.navigate(['game']);
-    });
-  }
-  logout() {
-    this.afAuth.auth.signOut();
+  ngOnInit() {}
+
+  onLogin() {
+    this.authService.login();
   }
 
-  ngOnInit() {
+  onLogout() {
+    this.authService.logout();
   }
-
 }
