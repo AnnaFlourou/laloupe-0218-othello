@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 // Config Routing
 import { AppComponent } from './app.component';
@@ -24,7 +25,8 @@ import { TitleComponent } from './title/title.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
 
 const appRoutes: Routes = [
-  { path: 'game', component: GameComponent },
+  { path: 'game', canActivate: [AuthGuardService], component: GameComponent },
+  // { path: 'game', component: GameComponent },
   { path: '', component: AuthComponent },
   { path: '404', component: FourOFourComponent },
   { path: '**', redirectTo: '404' },
@@ -50,7 +52,7 @@ const appRoutes: Routes = [
     AngularFireStorageModule,
     AngularFirestoreModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
