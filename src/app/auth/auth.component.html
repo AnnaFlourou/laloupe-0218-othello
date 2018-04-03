@@ -5,10 +5,26 @@
   <p>Please login.</p>
   <button (click)="login()">Login with Google</button>
 </ng-template>-->
+<!-- //////////////////////////////// -->
+
+<div *ngIf="authService.user | async; then authenticated">
+  <!-- template will replace this div -->
+</div>
+
+<!-- User logged in -->
+<!-- <ng-template #authenticated>
+  <div *ngIf="authService.user | async as user">
+    <h3>Howdy, {{ user.displayName }}</h3>
+    <img [src]="user.photoURL">
+    <p>UID: {{ user.uid }}</p>
+    <p>Favorite Color: {{ user?.favoriteColor }} </p>
+    <button (click)="onLogout()">Logout</button>
+  </div>
+</ng-template> -->
 
 
+<!-- /////////////////////////// -->
 <div class="my-custom-container mx-auto all-auth rounded">
-
   <div class="row mx-auto">
     <p class="mx-auto row">First, you need to registrate</p>
   </div>

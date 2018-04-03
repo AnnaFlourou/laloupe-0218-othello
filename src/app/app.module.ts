@@ -3,15 +3,14 @@ import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
 
-// Config Firebase
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireStorageModule } from 'angularfire2/storage';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
+// Own Module
+import { CoreModule } from './core/core.module';
 
-// Services
-import { AuthService } from './services/auth.service';
-import { AuthGuardService } from './services/auth-guard.service';
+// Config Firebase
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 // Config Routing
 import { AppComponent } from './app.component';
@@ -24,9 +23,11 @@ import { GameComponent } from './game/game.component';
 import { TitleComponent } from './title/title.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
 
+// Guard
+import { AuthGuard } from './core/auth.guard';
+
 const appRoutes: Routes = [
-  { path: 'game', canActivate: [AuthGuardService], component: GameComponent },
-  // { path: 'game', component: GameComponent },
+  { path: 'game', canActivate: [AuthGuard], component: GameComponent },
   { path: '', component: AuthComponent },
   { path: '404', component: FourOFourComponent },
   { path: '**', redirectTo: '404' },
@@ -51,8 +52,9 @@ const appRoutes: Routes = [
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
+    CoreModule,
   ],
-  providers: [AuthService, AuthGuardService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
