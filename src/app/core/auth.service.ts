@@ -22,8 +22,7 @@ export class AuthService {
 
   user: Observable<User>;
 
-  constructor(private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore,
     private router: Router) {
 
     //// Get auth data, then get firestore user document || null
@@ -31,9 +30,8 @@ export class AuthService {
       .switchMap((user) => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-        } else {
-          return Observable.of(null);
         }
+        return Observable.of(null);
       });
   }
 
