@@ -1,3 +1,7 @@
-<p>
-  table works!
-</p>
+<table class="text-center">
+  <tr *ngFor="let x of [1, 2, 3, 4, 5, 6, 7, 8]">
+    <td *ngFor="let y of [1, 2, 3, 4, 5, 6, 7, 8]" (click)="click(x, y, 1)">
+     <!-- <figure id="{{x}}-{{y}}" [ngClass]="getClass(x,y)" class="disc"></figure> -->
+    </td>
+  </tr>
+</table>
