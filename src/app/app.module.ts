@@ -25,6 +25,7 @@ import { FourOFourComponent } from './four-o-four/four-o-four.component';
 
 // Guard
 import { AuthGuard } from './core/auth.guard';
+import { TableComponent } from './table/table.component';
 
 const appRoutes: Routes = [
   { path: 'game', canActivate: [AuthGuard], component: GameComponent },
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
     GameComponent,
     TitleComponent,
     FourOFourComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
