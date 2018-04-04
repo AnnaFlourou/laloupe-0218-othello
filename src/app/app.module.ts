@@ -22,13 +22,15 @@ import { ProfilComponent } from './profil/profil.component';
 import { GameComponent } from './game/game.component';
 import { TitleComponent } from './title/title.component';
 import { FourOFourComponent } from './four-o-four/four-o-four.component';
+import { IngameComponent } from './ingame/ingame.component';
+import { TableComponent } from './table/table.component';
 
 // Guard
 import { AuthGuard } from './core/auth.guard';
-import { TableComponent } from './table/table.component';
 
 const appRoutes: Routes = [
   { path: 'game', canActivate: [AuthGuard], component: GameComponent },
+  { path: 'ingame/:id/:username', canActivate: [AuthGuard], component: IngameComponent },
   { path: '', component: AuthComponent },
   { path: '404', component: FourOFourComponent },
   { path: '**', redirectTo: '404' },
@@ -46,6 +48,7 @@ const appRoutes: Routes = [
     TitleComponent,
     FourOFourComponent,
     TableComponent,
+    IngameComponent,
   ],
   imports: [
     BrowserModule,

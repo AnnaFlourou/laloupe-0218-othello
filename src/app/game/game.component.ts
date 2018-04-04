@@ -19,12 +19,15 @@ export class GameComponent implements OnInit {
   constructor(private db: AngularFirestore, private router: Router) { }
 
   ngOnInit() {
-    this.getRooms();
+    // this.getRooms();
   }
+
+  // function to create rooms, and push a player.name based on a random number. 
+  isClicked: boolean = false;
+  waitMessage: boolean = false;
 
   getRooms() {
     const roomsCollection = this.db.collection<Room>('rooms');
-
     const snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
       player.name = 'user' + Math.floor(Math.random() * 1000);
@@ -36,18 +39,21 @@ export class GameComponent implements OnInit {
         if (room.players.length === 1) {
           room.players.push(player);
           this.db.doc('rooms/' + roomId).update(JSON.parse(JSON.stringify(room)));
-          // this.router.navigate(['game', roomId, player.name]);
+          this.router.navigate(['ingame', roomId, player.name]);
           return;
         }
       }
       const room = new Room();
       room.players = [player];
+      this.waitMessage = true;
       this.db.collection('rooms')
         .add(JSON.parse(JSON.stringify(room)))
-        // .then((doc) => {
-        //  this.router.navigate(['game', doc.id, player.name]);
-        // })
-      ;
+        .then((doc) => {
+          if (doc.id.length === 2) {
+            this.router.navigate(['ingame', doc.id, player.name]);
+          }
+        });
     });
+    this.isClicked = true;
   }
 }

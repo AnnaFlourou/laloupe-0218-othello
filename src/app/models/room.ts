@@ -5,6 +5,7 @@ export class Room {
   turn: number;
   piece: number = 64;
   winner: number;
+  waitMessage: boolean = false;
 }
 
 
