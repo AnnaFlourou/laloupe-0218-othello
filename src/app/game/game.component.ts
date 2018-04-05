@@ -9,6 +9,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
+import { DocumentSnapshot } from '@firebase/firestore-types';
 
 @Component({
   selector: 'app-game',
@@ -49,9 +50,11 @@ export class GameComponent implements OnInit {
       this.db.collection('rooms')
         .add(JSON.parse(JSON.stringify(room)))
         .then((doc) => {
-          if (doc.id.length === 2) {
-            this.router.navigate(['ingame', doc.id, player.name]);
-          }
+          doc.onSnapshot((docs) => {
+            if ((docs.data().players.length === 2)) {
+              this.router.navigate(['ingame', doc.id, player.name]);
+            }
+          });
         });
     });
     this.isClicked = true;
