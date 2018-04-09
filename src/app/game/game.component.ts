@@ -50,17 +50,11 @@ export class GameComponent implements OnInit {
       this.db.collection('rooms')
         .add(JSON.parse(JSON.stringify(room)))
         .then((doc) => {
-<<<<<<< HEAD
-          // if (room.players.length === 2) {
-          this.router.navigate(['ingame', doc.id, player.name]);
-          // }
-=======
           doc.onSnapshot((docs) => {
             if ((docs.data().players.length === 2)) {
               this.router.navigate(['ingame', doc.id, player.name]);
             }
           });
->>>>>>> 5fd727d433d542baf13213a41846cbdea21b9d7a
         });
     });
     this.isClicked = true;
