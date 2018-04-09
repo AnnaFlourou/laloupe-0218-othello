@@ -49,9 +49,9 @@ export class GameComponent implements OnInit {
       this.db.collection('rooms')
         .add(JSON.parse(JSON.stringify(room)))
         .then((doc) => {
-          if (doc.id.length === 2) {
-            this.router.navigate(['ingame', doc.id, player.name]);
-          }
+          // if (room.players.length === 2) {
+          this.router.navigate(['ingame', doc.id, player.name]);
+          // }
         });
     });
     this.isClicked = true;
