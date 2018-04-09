@@ -27,6 +27,7 @@ import { TableComponent } from './table/table.component';
 
 // Guard
 import { AuthGuard } from './core/auth.guard';
+import { BoardComponent } from './board/board.component';
 
 const appRoutes: Routes = [
   { path: 'game', canActivate: [AuthGuard], component: GameComponent },
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     FourOFourComponent,
     TableComponent,
     IngameComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,
