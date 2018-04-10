@@ -1,7 +1,7 @@
 <table class=" text-center">
   <tr *ngFor="let line of board; let x = index">
     <td *ngFor="let cell of board; let y = index" (click)="click(x, y)">
-      <figure id="{{x}}-{{y}}" [ngClass]="getClass(x,y)" class="disc"></figure>
+      <figure [ngClass]="getClass(x,y)" class="disc"></figure>
     </td>
   </tr>
 </table>
