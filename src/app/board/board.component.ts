@@ -24,7 +24,7 @@ export class BoardComponent implements OnInit {
 
   roomId: string;
   room: Room;
-
+  endGame: boolean;
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
@@ -45,40 +45,71 @@ export class BoardComponent implements OnInit {
     this.db.doc<Room>('rooms/' + this.roomId).set(this.room);
   }
 
-  click(x: number, y: number) {
-    if (this.room.board[x].line[y] !== 0) { return;}
-    /* Distribute black and white pieces for players */
+  canPlay(x: number, y: number) {
+    if (this.room.board[x].line[y] !== 0) { return false; }
+  }
+
+  distributePiece(x: number, y: number) {
     if (this.auth.myId === this.room.players[0].name) {
       this.room.board[x].line[y] = 1;
     } else {
       this.room.board[x].line[y] = 2;
     }
-    /* Count remaining pieces */
-    this.room.piece -= 1;
-    /* Turn System */
-    this.room.turn = this.auth.myId;
-    this.updateRoom();
-    if (this.room.piece === 0) {
-      let player1 = 0;
-      let player2 = 0;
+  }
 
-      for (let line = 0; line < 8; line += 1) {
-        for (let col = 0; col < 8; col += 1) {
-          if (this.room.board[line].line[col] === 1) {
-            player1 += 1;
-          } else {
-            player2 += 1 ;
-          }
+  countPiece() {
+    this.room.piece -= 1;
+  }
+
+  changeTurn() {
+    this.room.turn = this.auth.myId;
+  }
+
+  isFinish() {
+    if (this.room.piece === 0) { this.isWinner(); }
+  }
+
+  isWinner() {
+    let player1: number = 0;
+    let player2: number = 0;
+
+    for (let line = 0; line < 8; line += 1) {
+      for (let col = 0; col < 8; col += 1) {
+        if (this.room.board[line].line[col] === 1) {
+          player1 += 1;
+        } else {
+          player2 += 1;
         }
       }
-      if (player1 > player2) {
-        console.log('player1 wins!!');
-      } else if (player1 < player2) {
-        console.log('player2 wins!!');
-      } else {
-        console.log('Match NUL!!');
-      }
     }
+
+    if (player1 > player2) {
+      this.room.winner = this.room.players[0].name;
+    } else if (player1 < player2) {
+      this.room.winner = this.room.players[1].name;
+    } else {
+      this.room.winner = 'No Winner';
+      this.endGame = true;
+      console.log(this.room.winner);
+      return;
+    }
+
+    if (this.auth.myId === this.room.winner) {
+      console.log('YOU WIN');
+    } else { console.log('YOU LOOSE'); }
+
+    this.endGame = true;
+  }
+
+
+  click(x: number, y: number) {
+    if (this.canPlay(x, y) === false) { return; }
+    this.distributePiece(x, y);
+    this.countPiece();
+    this.changeTurn();
+    this.isFinish();
+
+    this.updateRoom();
   }
 
   getClass(x: number, y: number) {

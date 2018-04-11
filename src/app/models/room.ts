@@ -14,7 +14,7 @@ export class Room {
     { line: [0, 0, 0, 0, 0, 0, 0, 0] },
     { line: [0, 0, 0, 0, 0, 0, 0, 0] },
   ];
-  winner: number;
+  winner: string;
 }
 
 
