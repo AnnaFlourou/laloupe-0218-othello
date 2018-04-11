@@ -1,0 +1,65 @@
+.score_history {
+    background-color: rgb(120, 124, 143);
+    position: absolute;
+    width: 20%;
+    text-align: center;
+    border: 1px solid black;
+    height: 50%;
+  }
+  
+  .title {
+    position: absolute;
+    top: 0%;
+    left: 20%;
+    width: 60%;
+    text-align: center;
+    height: 18%;
+  }
+  
+  .profil {
+    background-color: rgb(120, 124, 143);
+    position: absolute;
+    left: 80%;
+    text-align: center;
+    border: 1px solid black;
+    height: 40%;
+    width: 20%;
+  }
+  
+  .wall_fame {
+    background-color: rgb(120, 124, 143);
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    text-align: center;
+    border: 1px solid black;
+    height: 50%;
+    width: 20%;
+  }
+  .chat {
+    background-color: rgb(120, 124, 143);
+    position: absolute;
+    left: 80%;
+    top: 95%;
+    text-align: center;
+    border: 1px solid black;
+    height: 5%;
+    width: 20%;
+  }
+  
+  .game {
+    position: absolute;
+    left: 28%;
+    top: 22%;
+    text-align: center;
+    border: 1px solid black;
+    height: 65%;
+    width: 45%;
+  }
+  
+  .title_game {
+    margin-top: 35%;
+    font-weight: bold;
+    font-size: 2em;
+  }
+  
