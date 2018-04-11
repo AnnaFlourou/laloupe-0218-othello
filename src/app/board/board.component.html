@@ -1,6 +1,6 @@
-<table class=" text-center">
-  <tr *ngFor="let line of board; let x = index">
-    <td *ngFor="let cell of board; let y = index" (click)="click(x, y)">
+<table class=" text-center" *ngIf="room">
+  <tr *ngFor="let lines of room.board; let x = index">
+    <td *ngFor="let cell of lines.line; let y = index" (click)="click(x, y)">
       <figure [ngClass]="getClass(x,y)" class="disc"></figure>
     </td>
   </tr>
