@@ -5,10 +5,10 @@
         <figure [ngClass]="getClass(x,y)" class="disc"></figure>
       </td>
     </ng-template>
-    <!-- <ng-template [ngIf]="room.turn != auth.myId">
+    <ng-template [ngIf]="room.turn == auth.myId">
       <td *ngFor="let cell of lines.line; let y = index">
         <figure [ngClass]="getClass(x,y)" class="disc"></figure>
       </td>
-    </ng-template> -->
+    </ng-template>
   </tr>
 </table>
