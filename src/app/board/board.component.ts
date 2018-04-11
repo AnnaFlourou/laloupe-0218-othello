@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
+import { log } from 'util';
 
 
 @Component({
@@ -24,10 +25,12 @@ export class BoardComponent implements OnInit {
   roomId: string;
   room: Room;
 
+
   constructor(private auth: AuthService,
               private db: AngularFirestore,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.roomId = this.route.snapshot.paramMap.get('id');
@@ -44,6 +47,7 @@ export class BoardComponent implements OnInit {
 
   click(x: number, y: number) {
     this.room.board[x].line[y] = 1;
+    this.room.turn = this.auth.myId;
     this.updateRoom();
   }
 

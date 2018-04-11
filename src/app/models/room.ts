@@ -2,7 +2,7 @@ import { Player } from './player';
 
 export class Room {
   players: Player[];
-  turn: number = 1;
+  turn: string;
   piece: number = 64;
   board: { line: number[] }[] = [
     { line: [0, 0, 0, 0, 0, 0, 0, 0] },
