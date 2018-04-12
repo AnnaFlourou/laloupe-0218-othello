@@ -141,81 +141,77 @@ export class BoardComponent implements OnInit {
 
   }
 
-  checkLine(x: number, y: number) {
-    console.log('Check line in progress');
-    if (y === 0) {
-      let i = y + 1;
-      while (this.room.board[x].line[i] === this.ennemyPiece) {
-        console.log('Premiere boucle' + i);
-        i += 1;
-      }
-      console.log('Sortie 1ere boucle' + i);
+  // checkLine(x: number, y: number) {
+  //   if (y === 0) {
+  //     let i = y + 1;
+  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
+  //       i += 1;
+  //     }
 
-      if (this.room.board[x].line[i] === this.myPiece) {
-        while (y !== i) {
-          console.log('Changing ennemy piece !');
-          this.room.board[x].line[i] = this.myPiece;
-          i -= 1;
-        }
-      }
-    }
+  //     if (this.room.board[x].line[i] === this.myPiece) {
+  //       while (y !== i) {
+  //         this.room.board[x].line[i] = this.myPiece;
+  //         i -= 1;
+  //       }
+  //     }
+  //   }
 
-    if (y === 7) {
-      let i = y - 1;
-      while (this.room.board[x].line[i] === this.ennemyPiece) {
-        console.log('Premiere boucle' + i);
-        i -= 1;
-      }
-      console.log('Sortie 1ere boucle' + i);
+  //   if (y === 7) {
+  //     let i = y - 1;
+  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
+  //       console.log('Premiere boucle' + i);
+  //       i -= 1;
+  //     }
+  //     console.log('Sortie 1ere boucle' + i);
 
-      if (this.room.board[x].line[i] === this.myPiece) {
-        while (y !== i) {
-          console.log('Changing ennemy piece !');
-          this.room.board[x].line[i] = this.myPiece;
-          i += 1;
-        }
-      }
-    }
+  //     if (this.room.board[x].line[i] === this.myPiece) {
+  //       while (y !== i) {
+  //         console.log('Changing ennemy piece !');
+  //         this.room.board[x].line[i] = this.myPiece;
+  //         i += 1;
+  //       }
+  //     }
+  //   }
 
-  }
+  // }
 
-  checkCol(x: number, y: number) {
-    console.log('Check line in progress');
-    if (x === 0) {
-      let i = x + 1;
-      while (this.room.board[x].line[i] === this.ennemyPiece) {
-        console.log('Premiere boucle' + i);
-        i += 1;
-      }
-      console.log('Sortie 1ere boucle' + i);
+  // checkCol(x: number, y: number) {
+  //   console.log('Check line in progress');
+  //   if (x === 0) {
+  //     let i = x + 1;
+  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
+  //       console.log('Premiere boucle' + i);
+  //       i += 1;
+  //     }
+  //     console.log('Sortie 1ere boucle' + i);
 
-      if (this.room.board[x].line[i] === this.myPiece) {
-        while (x !== i) {
-          console.log('Changing ennemy piece !');
-          this.room.board[x].line[i] = this.myPiece;
-          i -= 1;
-        }
-      }
-    }
+  //     if (this.room.board[x].line[i] === this.myPiece) {
+  //       while (x !== i) {
+  //         console.log('Changing ennemy piece !');
+  //         this.room.board[x].line[i] = this.myPiece;
+  //         i -= 1;
+  //       }
+  //     }
+  //   }
 
-    if (x === 7) {
-      let i = x - 1;
-      while (this.room.board[x].line[i] === this.ennemyPiece) {
-        console.log('Premiere boucle' + i);
-        i -= 1;
-      }
-      console.log('Sortie 1ere boucle' + i);
+  //   if (x === 7) {
+  //     let i = x - 1;
+  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
+  //       console.log('Premiere boucle' + i);
+  //       i -= 1;
+  //     }
+  //     console.log('Sortie 1ere boucle' + i);
 
-      if (this.room.board[x].line[i] === this.myPiece) {
-        while (x !== i) {
-          console.log('Changing ennemy piece !');
-          this.room.board[x].line[i] = this.myPiece;
-          i += 1;
-        }
-      }
-    }
+  //     if (this.room.board[x].line[i] === this.myPiece) {
+  //       while (x !== i) {
+  //         console.log('Changing ennemy piece !');
+  //         this.room.board[x].line[i] = this.myPiece;
+  //         i += 1;
+  //       }
+  //     }
+  //   }
 
-  }
+  // }
 
 
   setPiece(x: number, y: number) {
@@ -280,8 +276,8 @@ export class BoardComponent implements OnInit {
   click(x: number, y: number) {
     this.setPiece(x, y);
     if (this.canPlay(x, y) === false) { return; }
-    this.checkLine(x, y);
-    this.checkCol(x, y);
+    // this.checkLine(x, y);
+    // this.checkCol(x, y);
     this.putPiece(x, y);
     this.countPiece();
     this.changeTurn();
