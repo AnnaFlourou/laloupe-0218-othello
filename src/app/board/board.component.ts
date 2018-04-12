@@ -14,6 +14,11 @@ import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 import { log } from 'util';
+import { Neighbor } from '../models/neighbor';
+import { Direction } from '../models/direction';
+import { Increment } from '../models/increment';
+import { Position } from '../models/position';
+
 
 
 @Component({
@@ -49,45 +54,91 @@ export class BoardComponent implements OnInit {
     this.db.doc<Room>('rooms/' + this.roomId).set(this.room);
   }
 
+  getNeighbor(xPos: number, yPos: number, direction: Direction): Neighbor {
+    const neighbor = new Neighbor();
+    neighbor.direction = direction;
+
+    const position = new Position();
+    const increment = this.getIncrement(direction);
+    position.x = xPos + increment.x;
+    position.y = yPos + increment.y;
+
+    neighbor.position = position;
+    return neighbor;
+  }
+
+  getIncrement(direction: Direction): Increment {
+    let xIncrement = 0;
+    let yIncrement = 0;
+
+    switch (direction) {
+      case Direction.Up:
+        xIncrement = -1;
+        break;
+      case Direction.UpRight:
+        xIncrement = -1;
+        yIncrement = 1;
+        break;
+      case Direction.Right:
+        yIncrement = 1;
+        break;
+      case Direction.DownRight:
+        xIncrement = 1;
+        yIncrement = 1;
+        break;
+      case Direction.Down:
+        xIncrement = 1;
+        break;
+      case Direction.DownLeft:
+        xIncrement = 1;
+        yIncrement = -1;
+        break;
+      case Direction.Left:
+        yIncrement = -1;
+        break;
+      case Direction.UpLeft:
+        xIncrement = -1;
+        yIncrement = -1;
+        break;
+    }
+
+    const increment = new Increment();
+    increment.x = xIncrement;
+    increment.y = yIncrement;
+    return increment;
+  }
+
+  getOpponentNeighbors(xPos: number, yPos: number): Neighbor[] {
+    const directions = [
+      Direction.Up,
+      Direction.UpRight,
+      Direction.Right,
+      Direction.DownRight,
+      Direction.Down,
+      Direction.DownLeft,
+      Direction.Left,
+      Direction.UpLeft,
+    ];
+
+    const list = [];
+
+    for (const direction of directions) {
+      const neighbor = this.getNeighbor(xPos, yPos, direction);
+      if (neighbor.position.x >= 0 && neighbor.position.x < 8 &&
+        neighbor.position.y >= 0 && neighbor.position.y < 8) {
+        if (this.room.board[neighbor.position.x].line[neighbor.position.y] === this.ennemyPiece) {
+          list.push(neighbor);
+        }
+      }
+    }
+    return list;
+  }
 
   canPlay(x: number, y: number) {
-    if (this.room.board[x].line[y] !== 0) { return false; }
+    const opponentNeighbors = this.getOpponentNeighbors(x, y);
+    console.log(opponentNeighbors);
+    return true;
 
-    if (x !== 0 && x !== 7) {
-      if (this.room.board[x - 1].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x - 1].line[y] !== this.ennemyPiece &&
-        this.room.board[x - 1].line[y + 1] !== this.ennemyPiece &&
-        this.room.board[x].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x].line[y + 1] !== this.ennemyPiece &&
-        this.room.board[x + 1].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x + 1].line[y] !== this.ennemyPiece &&
-        this.room.board[x + 1].line[y + 1] !== this.ennemyPiece) {
-        console.log('x != 0 et x != 7');
-        return false;
-      }
-    }
-
-    if (x === 0) {
-      if (this.room.board[x].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x].line[y + 1] !== this.ennemyPiece &&
-        this.room.board[x + 1].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x + 1].line[y] !== this.ennemyPiece &&
-        this.room.board[x + 1].line[y + 1] !== this.ennemyPiece) {
-        console.log('x = 0');
-        return false;
-      }
-    }
-
-    if (x === 7) {
-      if (this.room.board[x - 1].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x - 1].line[y] !== this.ennemyPiece &&
-        this.room.board[x - 1].line[y + 1] !== this.ennemyPiece &&
-        this.room.board[x].line[y - 1] !== this.ennemyPiece &&
-        this.room.board[x].line[y + 1] !== this.ennemyPiece) {
-        console.log('x = 7');
-        return false;
-      }
-    }
   }
 
   checkLine(x: number, y: number) {
@@ -128,13 +179,53 @@ export class BoardComponent implements OnInit {
 
   }
 
+  checkCol(x: number, y: number) {
+    console.log('Check line in progress');
+    if (x === 0) {
+      let i = x + 1;
+      while (this.room.board[x].line[i] === this.ennemyPiece) {
+        console.log('Premiere boucle' + i);
+        i += 1;
+      }
+      console.log('Sortie 1ere boucle' + i);
+
+      if (this.room.board[x].line[i] === this.myPiece) {
+        while (x !== i) {
+          console.log('Changing ennemy piece !');
+          this.room.board[x].line[i] = this.myPiece;
+          i -= 1;
+        }
+      }
+    }
+
+    if (x === 7) {
+      let i = x - 1;
+      while (this.room.board[x].line[i] === this.ennemyPiece) {
+        console.log('Premiere boucle' + i);
+        i -= 1;
+      }
+      console.log('Sortie 1ere boucle' + i);
+
+      if (this.room.board[x].line[i] === this.myPiece) {
+        while (x !== i) {
+          console.log('Changing ennemy piece !');
+          this.room.board[x].line[i] = this.myPiece;
+          i += 1;
+        }
+      }
+    }
+
+  }
+
+
   setPiece(x: number, y: number) {
     if (this.auth.myId === this.room.players[0].name) {
       this.ennemyPiece = 2;
-      return this.myPiece = 1;
+      this.myPiece = 1;
+      return;
     }
     this.ennemyPiece = 1;
-    return this.myPiece = 2;
+    this.myPiece = 2;
   }
 
   putPiece(x: number, y: number) {
@@ -190,6 +281,7 @@ export class BoardComponent implements OnInit {
     this.setPiece(x, y);
     if (this.canPlay(x, y) === false) { return; }
     this.checkLine(x, y);
+    this.checkCol(x, y);
     this.putPiece(x, y);
     this.countPiece();
     this.changeTurn();
