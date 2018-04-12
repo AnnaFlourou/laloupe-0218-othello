@@ -3,6 +3,7 @@ import { Player } from './../models/player';
 import { Room } from './../models/room';
 
 import { AuthService } from '../core/auth.service';
+import { GamecoreService } from '../core/gamecore.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -29,7 +30,8 @@ export class BoardComponent implements OnInit {
   constructor(private auth: AuthService,
               private db: AngularFirestore,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private gamecore: GamecoreService) {
   }
 
   ngOnInit() {
