@@ -1,4 +1,11 @@
+@font-face {
+  font-family: 'pacifico';
+  src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
 .chat_title {
+  font-family: 'pacifico';
   margin-top: 2%;
-  font-weight: bold;
+  margin-bottom: 2%;
+  font-size: 1.7rem;
+  padding-bottom: 5px;
 }
