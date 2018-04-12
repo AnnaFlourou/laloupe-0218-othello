@@ -1,17 +1,18 @@
 table {
     margin: 0 auto;
   
-    border: solid 1px grey;
+    border: 1px solid #37474F;
     border-collapse: collapse;
-  
-    background: #8CBA9D;
+    border-radius: 5%;
+    background: rgb(177, 138, 124);
   
   }
 
 td {
     min-width: 70px;
     min-height: 70px;
-
+    border: 3px solid #00bfa5;
+    border-radius: 15%;
     width: 70px;
     height: 70px;
 
@@ -20,7 +21,11 @@ td {
   }
 
 tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
-  background: #A7C2B1;
+  background: #8D6E63;
+  border: 2px dotted #00bfa5;
+  border-radius: 15%;
+
+  
 }
 
 .disc {
