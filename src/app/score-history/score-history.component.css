@@ -1,4 +1,35 @@
+@font-face {
+  font-family: 'pacifico';
+  src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
+
+
 .game_history_title {
-  font-weight: bold;
+  font-family: 'pacifico';
+  font-size: 1.5rem;
   margin-top: 5%;
+}
+
+.auth-img {
+  width: 85%;
+  margin-top: -65px;
+}
+
+.allVersus{
+  font-family: 'Comic sans Ms';
+  font-size: 1.2rem;
+  font-style: italic;
+  
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.versus{
+  margin-top: -10px;
+  font-weight: bold;
+
+}
+
+.vs{
+  color: #00bfa5;
 }
