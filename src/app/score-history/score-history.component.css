@@ -5,7 +5,7 @@
 
 
 .game_history_title {
-  font-family: 'pacifico';
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
   margin-top: 5%;
 }
@@ -16,7 +16,7 @@
 }
 
 .allVersus{
-  font-family: 'Comic sans Ms';
+  font-family: 'Comic sans Ms', Arial, Helvetica, sans-serif;
   font-size: 1.2rem;
   font-style: italic;
   

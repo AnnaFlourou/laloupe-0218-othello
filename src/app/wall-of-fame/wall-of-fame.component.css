@@ -3,7 +3,7 @@
   src: url('../../assets/fonts/pacifico/pacifico.ttf');
 }
 .wall_fame_title {
-  font-family: 'pacifico';
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
   
   margin-top: 5%;
@@ -15,7 +15,7 @@
 
 .allWall{
   border: 1px solid #00bfa5;
-  font-family: 'Comic Sans Ms';
+  font-family: 'Comic Sans Ms', Arial, Helvetica, sans-serif;
   font-style: italic;
 }
 
