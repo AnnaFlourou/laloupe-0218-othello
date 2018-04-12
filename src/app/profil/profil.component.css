@@ -4,7 +4,7 @@
 }
 
 .username {
-  font-family: 'pacifico';
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
   font-size: 1.9rem;
   margin-top: 5%;
 }
@@ -29,11 +29,11 @@
 
 .settings_menu {
   
-  font-family: 'pacifico';
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
 }
 h1{
-  font-family: 'Pacifico', cursive;
+  font-family: 'Pacifico', Arial, Helvetica, sans-serif;
   color: #3e2723;
 }
 .animate
@@ -47,7 +47,7 @@ h1{
 	position: relative;
 	margin-top: 40%;
 	border-radius: 10px;
-	font-family: 'Pacifico', cursive;
+	font-family: 'Pacifico', Arial, Helvetica, sans-serif;
 	font-size: 25px;
 	color: #FFF;
 	text-decoration: none;	

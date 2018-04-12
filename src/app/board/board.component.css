@@ -1,9 +1,7 @@
 table {
   margin: 0 auto;
-
   border: 1px solid #37474F;
   border-collapse: collapse;
-  border-radius: 5%;
   background: rgb(177, 138, 124);
 
 }
@@ -22,7 +20,7 @@ td {
 
 tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
 background: #8D6E63;
-border: 2px dotted #00bfa5;
+border: 2px solid #00bfa5;
 border-radius: 15%;
 }
 
