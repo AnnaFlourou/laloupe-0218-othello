@@ -26,22 +26,22 @@ border: 2px dotted #00bfa5;
 border-radius: 15%;
 }
 
-  .disc {
-    display: block;
+.disc {
+  display: block;
   
-    border-radius: 50%;
-    height: 60%;
-    width: 60%;
+  border-radius: 50%;
+  height: 60%;
+  width: 60%;
   
-    margin: auto;
+  margin: auto;
+}
+  
+.disc-white {
+  background: white;
+  color: black;
   }
   
-  .disc-white {
-    background: white;
-    color: black;
-  }
-  
-  .disc-black {
-    background: black;
-    color: white;
+.disc-black {
+  background: black;
+  color: white;
   }

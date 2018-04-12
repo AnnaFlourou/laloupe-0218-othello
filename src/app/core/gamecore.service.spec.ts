@@ -5,7 +5,7 @@ import { GamecoreService } from './gamecore.service';
 describe('GamecoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GamecoreService]
+      providers: [GamecoreService],
     });
   });
 
