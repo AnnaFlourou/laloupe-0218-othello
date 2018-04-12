@@ -49,7 +49,7 @@ export class BoardComponent implements OnInit {
     if (this.room.board[x].line[y] !== 0) { return false; }
   }
 
-  distributePiece(x: number, y: number) {
+  setPiece(x: number, y: number) {
     if (this.auth.myId === this.room.players[0].name) {
       this.room.board[x].line[y] = 1;
     } else {
@@ -104,7 +104,7 @@ export class BoardComponent implements OnInit {
 
   click(x: number, y: number) {
     if (this.canPlay(x, y) === false) { return; }
-    this.distributePiece(x, y);
+    this.setPiece(x, y);
     this.countPiece();
     this.changeTurn();
     this.isFinish();
