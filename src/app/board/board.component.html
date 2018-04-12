@@ -1,7 +1,14 @@
 <table class=" text-center" *ngIf="room">
   <tr *ngFor="let lines of room.board; let x = index">
-    <td *ngFor="let cell of lines.line; let y = index" (click)="click(x, y)">
-      <figure [ngClass]="getClass(x,y)" class="disc"></figure>
-    </td>
+    <ng-template [ngIf]="room.turn != auth.myId">
+      <td *ngFor="let cell of lines.line; let y = index" (click)="click(x, y)">
+        <figure [ngClass]="getClass(x,y)" class="disc"></figure>
+      </td>
+    </ng-template>
+    <ng-template [ngIf]="room.turn == auth.myId">
+      <td *ngFor="let cell of lines.line; let y = index">
+        <figure [ngClass]="getClass(x,y)" class="disc"></figure>
+      </td>
+    </ng-template>
   </tr>
 </table>

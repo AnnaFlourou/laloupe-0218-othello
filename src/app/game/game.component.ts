@@ -34,13 +34,13 @@ export class GameComponent implements OnInit {
     const snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
       player.name = this.auth.myId;
-      // player.cards = [];
 
       for (const snapshotItem of snapshot) {
         const roomId = snapshotItem.payload.doc.id;
         const room = snapshotItem.payload.doc.data() as Room;
         if (room.players.length === 1) {
           room.players.push(player);
+          room.turn = room.players[1].name;
           this.db.doc('rooms/' + roomId).update(JSON.parse(JSON.stringify(room)));
           this.router.navigate(['ingame', roomId, player.name]);
           return;
