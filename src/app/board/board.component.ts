@@ -26,12 +26,14 @@ export class BoardComponent implements OnInit {
   roomId: string;
   room: Room;
   endGame: boolean;
+  ennemyPiece: number;
+  myPiece: number;
 
   constructor(private auth: AuthService,
-              private db: AngularFirestore,
-              private router: Router,
-              private route: ActivatedRoute,
-              private gamecore: GamecoreService) {
+    private db: AngularFirestore,
+    private router: Router,
+    private route: ActivatedRoute,
+    private gamecore: GamecoreService) {
   }
 
   ngOnInit() {
@@ -49,14 +51,58 @@ export class BoardComponent implements OnInit {
 
   canPlay(x: number, y: number) {
     if (this.room.board[x].line[y] !== 0) { return false; }
+
+    if (x !== 0 && x !== 7) {
+      if (this.room.board[x - 1].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x - 1].line[y] !== this.ennemyPiece &&
+        this.room.board[x - 1].line[y + 1] !== this.ennemyPiece &&
+        this.room.board[x].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x].line[y + 1] !== this.ennemyPiece &&
+        this.room.board[x + 1].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x + 1].line[y] !== this.ennemyPiece &&
+        this.room.board[x + 1].line[y + 1] !== this.ennemyPiece) {
+        console.log('x != 0 et x != 7');
+        return false;
+      }
+    }
+
+    if (x === 0) {
+      if (this.room.board[x].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x].line[y + 1] !== this.ennemyPiece &&
+        this.room.board[x + 1].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x + 1].line[y] !== this.ennemyPiece &&
+        this.room.board[x + 1].line[y + 1] !== this.ennemyPiece) {
+        console.log('x = 0');
+        return false;
+      }
+    }
+
+    if (x === 7) {
+      if (this.room.board[x - 1].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x - 1].line[y] !== this.ennemyPiece &&
+        this.room.board[x - 1].line[y + 1] !== this.ennemyPiece &&
+        this.room.board[x].line[y - 1] !== this.ennemyPiece &&
+        this.room.board[x].line[y + 1] !== this.ennemyPiece) {
+        console.log('x = 7');
+        return false;
+      }
+    }
+
+
   }
 
   setPiece(x: number, y: number) {
     if (this.auth.myId === this.room.players[0].name) {
-      this.room.board[x].line[y] = 1;
+      this.ennemyPiece = 2;
+      return this.myPiece = 1;
     } else {
-      this.room.board[x].line[y] = 2;
+      this.ennemyPiece = 1;
+      return this.myPiece = 2;
     }
+  }
+
+  putPiece(x: number, y: number) {
+    this.room.board[x].line[y] = this.myPiece;
   }
 
   countPiece() {
@@ -105,8 +151,10 @@ export class BoardComponent implements OnInit {
 
 
   click(x: number, y: number) {
-    if (this.canPlay(x, y) === false) { return; }
     this.setPiece(x, y);
+    if (this.canPlay(x, y) === false) { return; }
+
+    this.putPiece(x, y);
     this.countPiece();
     this.changeTurn();
     this.isFinish();
