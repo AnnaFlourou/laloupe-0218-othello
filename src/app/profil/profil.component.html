@@ -1,21 +1,14 @@
 <div class="container">
   <div class="row" *ngIf="authService.user | async as user">
-    <div class="col-8 username">
+    <div class="col-12 username">
       <span>{{ user.displayName }}</span>
     </div>
-    <div class="col-2 avatar">
+    <div class="col-12 avatar">
       <img class="avatar" [src]="user.photoURL">
     </div>
   </div>
-  <div class="row">
-    <div class="offset-1 col-10">
-      <hr class="lineHr">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 settings">
-      <span>Settings</span>
-    </div>
+  <div class="row allSettings">
+    <div class="col-12 settings"></div>
   </div>
 
   <div class="row settings_menu">
@@ -40,7 +33,7 @@
   </div>
   <div class="row">
     <div class="offset-4 col-2">
-      <button class="btn btn-danger" (click)="onLogout()">Logout</button>
+      <button class="action-button shadow animate blue" (click)="onLogout()">Logout</button>
     </div>
   </div>
 </div>
