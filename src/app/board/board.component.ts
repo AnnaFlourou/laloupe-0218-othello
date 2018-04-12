@@ -33,6 +33,7 @@ export class BoardComponent implements OnInit {
   endGame: boolean;
   ennemyPiece: number;
   myPiece: number;
+  isGameFinish: boolean;
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
@@ -135,84 +136,48 @@ export class BoardComponent implements OnInit {
   }
 
   canPlay(x: number, y: number) {
+    let canIPlay: boolean;
+    let count = 0;
+
     const opponentNeighbors = this.getOpponentNeighbors(x, y);
+    if (opponentNeighbors.length === 0 || this.room.board[x].line[y] !== 0) { return false; }
+
+    for (const ennemy of opponentNeighbors) {
+      const list = [ennemy];
+      let trigger = true;
+      console.log('1');
+      while (trigger) {
+        console.log('2');
+        const lastOpponent = this.getNeighbor(list[list.length - 1].position.x,
+                                              list[list.length - 1].position.y,
+                                              list[list.length - 1].direction);
+        if (lastOpponent.position.x >= 0 && lastOpponent.position.x < 8 &&
+          lastOpponent.position.y >= 0 && lastOpponent.position.y < 8) {
+          if (this.room.board[lastOpponent.position.x].
+            line[lastOpponent.position.y] === this.ennemyPiece) {
+            list.push(lastOpponent);
+            console.log('toto : ', list);
+          } else if (this.room.board[lastOpponent.position.x]
+            .line[lastOpponent.position.y] === this.myPiece) {
+            for (const changeEnnemy of list) {
+              console.log('3');
+              this.room.board[changeEnnemy.position.x].line[changeEnnemy.position.y] = this.myPiece;
+              count += 1;
+              trigger = false;
+            }
+          } else {
+            break;
+          }
+        } else { break; }
+      }
+    }
+
+    count !== 0 ? canIPlay = true : canIPlay = false;
+
     console.log(opponentNeighbors);
-    return true;
+    return canIPlay;
 
   }
-
-  // checkLine(x: number, y: number) {
-  //   if (y === 0) {
-  //     let i = y + 1;
-  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
-  //       i += 1;
-  //     }
-
-  //     if (this.room.board[x].line[i] === this.myPiece) {
-  //       while (y !== i) {
-  //         this.room.board[x].line[i] = this.myPiece;
-  //         i -= 1;
-  //       }
-  //     }
-  //   }
-
-  //   if (y === 7) {
-  //     let i = y - 1;
-  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
-  //       console.log('Premiere boucle' + i);
-  //       i -= 1;
-  //     }
-  //     console.log('Sortie 1ere boucle' + i);
-
-  //     if (this.room.board[x].line[i] === this.myPiece) {
-  //       while (y !== i) {
-  //         console.log('Changing ennemy piece !');
-  //         this.room.board[x].line[i] = this.myPiece;
-  //         i += 1;
-  //       }
-  //     }
-  //   }
-
-  // }
-
-  // checkCol(x: number, y: number) {
-  //   console.log('Check line in progress');
-  //   if (x === 0) {
-  //     let i = x + 1;
-  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
-  //       console.log('Premiere boucle' + i);
-  //       i += 1;
-  //     }
-  //     console.log('Sortie 1ere boucle' + i);
-
-  //     if (this.room.board[x].line[i] === this.myPiece) {
-  //       while (x !== i) {
-  //         console.log('Changing ennemy piece !');
-  //         this.room.board[x].line[i] = this.myPiece;
-  //         i -= 1;
-  //       }
-  //     }
-  //   }
-
-  //   if (x === 7) {
-  //     let i = x - 1;
-  //     while (this.room.board[x].line[i] === this.ennemyPiece) {
-  //       console.log('Premiere boucle' + i);
-  //       i -= 1;
-  //     }
-  //     console.log('Sortie 1ere boucle' + i);
-
-  //     if (this.room.board[x].line[i] === this.myPiece) {
-  //       while (x !== i) {
-  //         console.log('Changing ennemy piece !');
-  //         this.room.board[x].line[i] = this.myPiece;
-  //         i += 1;
-  //       }
-  //     }
-  //   }
-
-  // }
-
 
   setPiece(x: number, y: number) {
     if (this.auth.myId === this.room.players[0].name) {
@@ -232,12 +197,16 @@ export class BoardComponent implements OnInit {
     this.room.piece -= 1;
   }
 
-  changeTurn() {
+  changeTurn(x: number = 0) {
     this.room.turn = this.auth.myId;
+    if (x === 1) { this.updateRoom(); }
   }
 
   isFinish() {
-    if (this.room.piece === 0) { this.isWinner(); }
+    if (this.room.piece === 0) {
+      this.isGameFinish = true;
+      this.isWinner();
+    }
   }
 
   isWinner() {
@@ -261,13 +230,12 @@ export class BoardComponent implements OnInit {
     } else {
       this.room.winner = 'No Winner';
       this.endGame = true;
-      console.log(this.room.winner);
       return;
     }
 
     if (this.auth.myId === this.room.winner) {
-      console.log('YOU WIN');
-    } else { console.log('YOU LOOSE'); }
+      alert('YOU WIN');
+    } else { alert('YOU LOOSE'); }
 
     this.endGame = true;
   }
@@ -275,15 +243,14 @@ export class BoardComponent implements OnInit {
 
   click(x: number, y: number) {
     this.setPiece(x, y);
-    if (this.canPlay(x, y) === false) { return; }
-    // this.checkLine(x, y);
-    // this.checkCol(x, y);
+    if (!(this.canPlay(x, y))) { return; }
     this.putPiece(x, y);
     this.countPiece();
     this.changeTurn();
     this.isFinish();
 
     this.updateRoom();
+
   }
 
   getClass(x: number, y: number) {

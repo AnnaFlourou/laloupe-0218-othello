@@ -43,3 +43,43 @@ border-radius: 15%;
   background: black;
   color: white;
   }
+
+/*play button*/
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	margin-top: 5%;
+	border-radius: 10px;
+	font-family: 'Pacifico', cursive;
+	font-size: 35px;
+	color: #FFF;
+  text-decoration: none;
+  animation: bounce 2s ease infinite;	
+}
+.action-btn
+{
+	position: relative;
+	margin-top: 5%;
+	border-radius: 10px;
+	font-family: 'Pacifico', cursive;
+	font-size: 35px;
+	color: #FFF;
+  text-decoration: none;
+  
+}
+
+.green
+{
+	background-color: #8D6E63;
+	border-bottom: 5px solid #00bfa5;
+	text-shadow: 0px -2px #8D6E63;
+}
+.action-button:hover{
+  animation: display;
+}
