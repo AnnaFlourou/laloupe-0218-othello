@@ -1,17 +1,44 @@
 <app-title></app-title>
-
 <div class="my-custom-container mx-auto all-auth rounded">
   <div class="row mx-auto">
-    <p class="mx-auto row">First, you need to registrate</p>
+    <p class="mx-auto row">First, you need to register</p>
   </div>
   <div *ngIf="afAuth.authState | async as user; else showLogin">
-    <h1>Hello {{ user.displayName }}!</h1>
-    <button (click)="onLogout()">Logout</button>
+    <h1>Hello {{ user.displayName }} !</h1>
+    <button class="action-button shadow animate blue" (click)="onLogout()">Logout</button>
   </div>
   <ng-template class="row mx-auto logButton" #showLogin>
     <img (click)="onLogin()" src='./assets/images/btn-google.png' alt="btn-google" />
   </ng-template>
 </div>
+
+<div class="container rules">
+
+  <div class="row">
+    <h2 class="mx-auto">Rules</h2>
+  </div>
+  <div class="row mx-auto">
+    <div>
+      <p class="mx-auto">Othello is a strategy board game played between 2 players.
+        <br/> One player plays black and the other white. Each player gets 32 discs and black always starts the game.
+        <br/> Then the game alternates between white and black until:</p>
+
+      <ul class="mx-auto">
+        <li>one player can not make a valid move to outflank the opponent.</li>
+        <li>both players have no valid moves.</li>
+      </ul>
+      <p class="mx-auto">When a player has no valid moves, he pass his turn and the opponent continues. A player can not voluntarily forfeit
+        his turn. When both players can not make a valid move the gane ends.</p>
+
+      <p>for more information about the rules :
+        <a class="text-center" target="_blank" href="https://www.wikihow.com/Play-Othello"> click here</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
 
 <!-- footer -->
 <footer class="footer fixed-bottom">

@@ -11,4 +11,8 @@
   font-family: 'mans', Arial, Helvetica, sans-serif;
   font-size: 11rem;
   color: #3e2723;
+  -webkit-animation-duration: 2s;
+  animation-name: bounceIn;
+  animation-duration: 10s;
 }
+

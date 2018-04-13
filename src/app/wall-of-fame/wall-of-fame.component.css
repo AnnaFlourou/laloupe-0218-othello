@@ -1,4 +1,29 @@
+@font-face {
+  font-family: 'pacifico';
+  src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
 .wall_fame_title {
-  font-weight: bold;
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  
   margin-top: 5%;
 }
+.auth-img {
+  width: 85%;
+  margin-top: -65px;
+}
+
+.allWall{
+  border: 1px solid #00bfa5;
+  font-family: 'Comic Sans Ms', Arial, Helvetica, sans-serif;
+  font-style: italic;
+}
+
+.range{
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+.name{
+  font-size: 1.4rem;
+}
+

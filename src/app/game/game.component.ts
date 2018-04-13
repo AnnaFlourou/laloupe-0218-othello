@@ -1,6 +1,8 @@
 import { Player } from './../models/player';
 import { Room } from './../models/room';
 
+import { AuthService } from '../core/auth.service';
+
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -17,10 +19,10 @@ import { DocumentSnapshot } from '@firebase/firestore-types';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-  constructor(private db: AngularFirestore, private router: Router) { }
+  constructor(private db: AngularFirestore, private router: Router, private auth: AuthService) { }
+
 
   ngOnInit() {
-    // this.getRooms();
   }
 
   // function to create rooms, and push a player.name based on a random number. 
@@ -31,14 +33,14 @@ export class GameComponent implements OnInit {
     const roomsCollection = this.db.collection<Room>('rooms');
     const snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
-      player.name = 'user' + Math.floor(Math.random() * 1000);
-      // player.cards = [];
+      player.name = this.auth.myId;
 
       for (const snapshotItem of snapshot) {
         const roomId = snapshotItem.payload.doc.id;
         const room = snapshotItem.payload.doc.data() as Room;
         if (room.players.length === 1) {
           room.players.push(player);
+          room.turn = room.players[1].name;
           this.db.doc('rooms/' + roomId).update(JSON.parse(JSON.stringify(room)));
           this.router.navigate(['ingame', roomId, player.name]);
           return;

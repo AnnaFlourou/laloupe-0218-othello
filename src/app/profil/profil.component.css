@@ -1,5 +1,11 @@
+@font-face {
+  font-family: 'pacifico';
+  src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
+
 .username {
-  font-weight: bold;
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
+  font-size: 1.9rem;
   margin-top: 5%;
 }
 
@@ -8,16 +14,48 @@
   width: 60px;
   margin-top: 5%;
 }
-
-.lineHr {
-  height: 1px;
-  background-color: dimgrey;
+.avatar img{
+  border: 3px solid #00bfa5;
+  border-radius: 50%;
+  width:130px;
+  height:120px;
 }
 
-.settings {
-  font-weight: bold;
+
+.allSettings{
+  padding-top: 25%;
+  
 }
+
 .settings_menu {
-  margin-top: 10%;
-  font-weight: bold;
+  
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+}
+h1{
+  font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+  color: #3e2723;
+}
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	margin-top: 40%;
+	border-radius: 10px;
+	font-family: 'Pacifico', Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	color: #FFF;
+	text-decoration: none;	
+}
+
+.blue
+{
+	background-color: #3498DB;
+	border-bottom: 5px solid #2980B9;
+	text-shadow: 0px -2px #2980B9;
 }
