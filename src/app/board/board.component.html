@@ -12,3 +12,6 @@
     </ng-template>
   </tr>
 </table>
+
+<button *ngIf="!isGameFinish" class='action-btn shadow animate green' (click)="changeTurn(1)">Pass</button>
+<button *ngIf="isGameFinish" class='action-button shadow animate green' routerLink="/game">Quit</button>

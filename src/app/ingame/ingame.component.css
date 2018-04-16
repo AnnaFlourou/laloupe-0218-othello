@@ -1,9 +1,10 @@
 .score_history {
-    background-color: rgb(120, 124, 143);
+    background-color: #f5f5f5;
     position: absolute;
     width: 20%;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #b18a7c;
+    border-radius: 5px;
     height: 50%;
   }
   
@@ -17,32 +18,35 @@
   }
   
   .profil {
-    background-color: rgb(120, 124, 143);
+    background-color: #f5f5f5;
     position: absolute;
     left: 80%;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #b18a7c;
+    border-radius: 5px;
     height: 40%;
     width: 20%;
   }
   
   .wall_fame {
-    background-color: rgb(120, 124, 143);
+    background-color: #f5f5f5;
     position: absolute;
     top: 50%;
     left: 0%;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid #b18a7c;
+    border-radius: 5px;
     height: 50%;
     width: 20%;
   }
   .chat {
-    background-color: rgb(120, 124, 143);
+    background-color: #f5f5f5;
     position: absolute;
     left: 80%;
-    top: 95%;
+    top: 92%;
     text-align: center;
-    border: 1px solid black;
+    border: 2.5px dotted #b18a7c;
+    border-radius: 5px;
     height: 5%;
     width: 20%;
   }
@@ -63,3 +67,4 @@
     font-size: 2em;
   }
   
+

@@ -43,7 +43,7 @@
   background-color:#f5f5f5;
   position: absolute;
   left: 80%;
-  top: 95%;
+  top: 92%;
   text-align: center;
   border: 3px dotted #b18a7c;
   border-radius: 5px;
@@ -95,4 +95,7 @@ h1{
 	background-color: #8D6E63;
 	border-bottom: 5px solid #00bfa5;
 	text-shadow: 0px -2px #8D6E63;
+}
+.action-button:hover{
+  animation: display;
 }

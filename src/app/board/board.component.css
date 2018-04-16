@@ -1,9 +1,7 @@
 table {
   margin: 0 auto;
-
   border: 1px solid #37474F;
   border-collapse: collapse;
-  border-radius: 5%;
   background: rgb(177, 138, 124);
 
 }
@@ -22,7 +20,7 @@ td {
 
 tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
 background: #8D6E63;
-border: 2px dotted #00bfa5;
+border: 2px solid #00bfa5;
 border-radius: 15%;
 }
 
@@ -45,3 +43,43 @@ border-radius: 15%;
   background: black;
   color: white;
   }
+
+/*play button*/
+.animate
+{
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.action-button
+{
+	position: relative;
+	margin-top: 5%;
+	border-radius: 10px;
+	font-family: 'Pacifico', cursive;
+	font-size: 35px;
+	color: #FFF;
+  text-decoration: none;
+  animation: bounce 2s ease infinite;	
+}
+.action-btn
+{
+	position: relative;
+	margin-top: 5%;
+	border-radius: 10px;
+	font-family: 'Pacifico', cursive;
+	font-size: 35px;
+	color: #FFF;
+  text-decoration: none;
+  
+}
+
+.green
+{
+	background-color: #8D6E63;
+	border-bottom: 5px solid #00bfa5;
+	text-shadow: 0px -2px #8D6E63;
+}
+.action-button:hover{
+  animation: display;
+}

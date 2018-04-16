@@ -3,8 +3,7 @@
   src: url('../../assets/fonts/pacifico/pacifico.ttf');
 }
 .chat_title {
-  font-family: 'pacifico';
-  margin-top: 2%;
+  font-family: 'pacifico', Arial, Helvetica, sans-serif;
   margin-bottom: 2%;
   font-size: 1.7rem;
   padding-bottom: 5px;
