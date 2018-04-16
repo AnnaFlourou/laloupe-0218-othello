@@ -3,7 +3,6 @@ import { Player } from './../models/player';
 import { Room } from './../models/room';
 
 import { AuthService } from '../core/auth.service';
-import { GamecoreService } from '../core/gamecore.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -38,8 +37,7 @@ export class BoardComponent implements OnInit {
   constructor(private auth: AuthService,
               private db: AngularFirestore,
               private router: Router,
-              private route: ActivatedRoute,
-              private gamecore: GamecoreService) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -145,9 +143,8 @@ export class BoardComponent implements OnInit {
     for (const ennemy of opponentNeighbors) {
       const list = [ennemy];
       let trigger = true;
-      console.log('1');
+
       while (trigger) {
-        console.log('2');
         const lastOpponent = this.getNeighbor(list[list.length - 1].position.x,
                                               list[list.length - 1].position.y,
                                               list[list.length - 1].direction);
@@ -156,11 +153,10 @@ export class BoardComponent implements OnInit {
           if (this.room.board[lastOpponent.position.x].
             line[lastOpponent.position.y] === this.ennemyPiece) {
             list.push(lastOpponent);
-            console.log('toto : ', list);
+
           } else if (this.room.board[lastOpponent.position.x]
             .line[lastOpponent.position.y] === this.myPiece) {
             for (const changeEnnemy of list) {
-              console.log('3');
               this.room.board[changeEnnemy.position.x].line[changeEnnemy.position.y] = this.myPiece;
               count += 1;
               trigger = false;
@@ -174,7 +170,6 @@ export class BoardComponent implements OnInit {
 
     count !== 0 ? canIPlay = true : canIPlay = false;
 
-    console.log(opponentNeighbors);
     return canIPlay;
 
   }
