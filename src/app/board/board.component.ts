@@ -30,10 +30,10 @@ export class BoardComponent implements OnInit {
   myPiece: number;
 
   constructor(private auth: AuthService,
-    private db: AngularFirestore,
-    private router: Router,
-    private route: ActivatedRoute,
-    private gamecore: GamecoreService) {
+              private db: AngularFirestore,
+              private router: Router,
+              private route: ActivatedRoute,
+              private gamecore: GamecoreService) {
   }
 
   ngOnInit() {
