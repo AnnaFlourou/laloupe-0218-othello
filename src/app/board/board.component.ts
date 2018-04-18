@@ -49,6 +49,11 @@ export class BoardComponent implements OnInit {
         if (this.room.piece === 0) {
           this.isFinish();
         }
+        if (this.room.turn === this.auth.myId) {
+          this.turn = 'Opponent turn !';
+        } else {
+          this.turn = 'Your turn !';
+        }
       });
   }
 
@@ -197,11 +202,6 @@ export class BoardComponent implements OnInit {
 
   changeTurn(x: number = 0) {
     this.room.turn = this.auth.myId;
-    if (this.room.turn === this.auth.myId) {
-      this.turn = 'Opponent turn';
-    } else {
-      this.turn = 'Your turn';
-    }
     if (x === 1) { this.updateRoom(); }
   }
 
