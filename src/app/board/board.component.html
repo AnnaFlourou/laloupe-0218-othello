@@ -1,5 +1,5 @@
 <div class="row instructions">
-  <p>{{result}}</p>
+  <p class="offset-2 col-4" *ngIf="result">{{result}}</p>
   <p class="offset-2 col-4" *ngIf="!result">{{turn}}</p>
   <p>
     <span class="pl1">Player 1 </span>: {{scorePlayer1}}
