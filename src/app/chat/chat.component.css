@@ -8,3 +8,8 @@
   font-size: 1.7rem;
   padding-bottom: 5px;
 }
+
+.chatbox{
+  max-height: 250px;
+  overflow-y: scroll;
+}

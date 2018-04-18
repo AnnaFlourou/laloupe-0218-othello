@@ -22,6 +22,7 @@ export class AuthService {
 
   myId: string;
   user: Observable<User>;
+  name: string;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore,
               private router: Router) {
@@ -31,6 +32,7 @@ export class AuthService {
       .switchMap((user) => {
         if (user) {
           this.myId = user.uid;
+          this.name = user.displayName;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         }
         return Observable.of(null);
