@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Player } from './../models/player';
 import { Room } from './../models/room';
 
@@ -9,7 +9,6 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
 import { log } from 'util';
@@ -17,6 +16,7 @@ import { Neighbor } from '../models/neighbor';
 import { Direction } from '../models/direction';
 import { Increment } from '../models/increment';
 import { Position } from '../models/position';
+import { Subscription } from 'rxjs/Rx';
 
 
 
@@ -25,7 +25,7 @@ import { Position } from '../models/position';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
   roomId: string;
   room: Room;
@@ -35,6 +35,7 @@ export class BoardComponent implements OnInit {
   turn: string = '';
   scorePlayer1: number = 0;
   scorePlayer2: number = 0;
+  subscription: Subscription;
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
@@ -45,30 +46,30 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     this.roomId = this.route.snapshot.paramMap.get('id');
 
-    this.db.doc<Room>('rooms/' + this.roomId).valueChanges()
-      .subscribe((room) => {
-        this.room = room;
-        if (this.room.piece === 0) {
-          this.isFinish();
-        }
-        if (this.room.turn === this.auth.myId) {
-          this.turn = 'Opponent turn !';
-        } else {
-          this.turn = 'Your turn !';
-        }
-        this.scorePlayer1 = 0;
-        this.scorePlayer2 = 0;
-        for (let line = 0; line < 8; line += 1) {
-          for (let col = 0; col < 8; col += 1) {
-            if (this.room.board[line].line[col] === 1) {
-              this.scorePlayer1 += 1;
-            } else if (this.room.board[line].line[col] === 2) {
-              this.scorePlayer2 += 1;
-            }
-          }
-        }
+    this.subscription = this.db.doc<Room>('rooms/' + this.roomId).valueChanges()
+                .subscribe((room) => {
+                  this.room = room;
+                  if (this.room.piece === 0) {
+                    this.isFinish();
+                  }
+                  if (this.room.turn === this.auth.myId) {
+                    this.turn = 'Opponent turn !';
+                  } else {
+                    this.turn = 'Your turn !';
+                  }
+                  this.scorePlayer1 = 0;
+                  this.scorePlayer2 = 0;
+                  for (let line = 0; line < 8; line += 1) {
+                    for (let col = 0; col < 8; col += 1) {
+                      if (this.room.board[line].line[col] === 1) {
+                        this.scorePlayer1 += 1;
+                      } else if (this.room.board[line].line[col] === 2) {
+                        this.scorePlayer2 += 1;
+                      }
+                    }
+                  }
 
-      });
+                });
   }
 
   updateRoom() {
@@ -268,6 +269,10 @@ export class BoardComponent implements OnInit {
     if (this.room.board[x].line[y] === 1) { return 'disc-white'; }
     if (this.room.board[x].line[y] === 2) { return 'disc-black'; }
     if (this.room.board[x].line[y] === 0) { return 'disc-empty'; }
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }
