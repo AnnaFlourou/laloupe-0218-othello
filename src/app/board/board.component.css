@@ -84,7 +84,7 @@ tr:nth-child(even) td:nth-child(odd) {
 }
 
 .instructions {
-    font-family: 'pacifico';
+    font-family: 'pacifico', cursive;
     font-size: 1.6rem;
 }
 
@@ -96,5 +96,4 @@ tr:nth-child(even) td:nth-child(odd) {
 .pl2 {
     color: white;
     text-shadow: 0px 2px #8D6E63, 2px 0px #8D6E63, 0px -2px #8D6E63, -2px 0px #8D6E63;
-    ;
 }
