@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs/Rx';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit, OnDestroy {
-  
+
   isClicked: boolean = false;
   waitMessage: boolean = false;
   snapshot: Subscription;
@@ -34,7 +34,11 @@ export class GameComponent implements OnInit, OnDestroy {
   // function to create rooms, and push a player.name based on a random number. 
 
   getRooms() {
-    const roomsCollection = this.db.collection<Room>('rooms');
+
+    const roomsCollection = this.db.collection<Room>(
+      'rooms',
+      ref => ref.where('waiting', '==', true),
+    );
     this.snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
       player.name = this.auth.myId;
@@ -44,6 +48,7 @@ export class GameComponent implements OnInit, OnDestroy {
         const room = snapshotItem.payload.doc.data() as Room;
         if (room.players.length === 1) {
           room.players.push(player);
+          room.waiting = false;
           room.turn = room.players[1].name;
           this.db.doc('rooms/' + roomId).update(JSON.parse(JSON.stringify(room)));
           this.router.navigate(['ingame', roomId, player.name]);
@@ -66,7 +71,7 @@ export class GameComponent implements OnInit, OnDestroy {
     this.isClicked = true;
   }
 
-  ngOnDestroy () {
+  ngOnDestroy() {
     this.snapshot.unsubscribe();
   }
 }
