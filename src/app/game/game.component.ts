@@ -4,23 +4,24 @@ import { Room } from './../models/room';
 import { AuthService } from '../core/auth.service';
 
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   constructor(private db: AngularFirestore, private router: Router, private auth: AuthService) { }
 
+  snapshot: Subscription;
 
   ngOnInit() {
   }
@@ -31,7 +32,7 @@ export class GameComponent implements OnInit {
 
   getRooms() {
     const roomsCollection = this.db.collection<Room>('rooms');
-    const snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
+    this.snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
       player.name = this.auth.myId;
 
@@ -60,5 +61,9 @@ export class GameComponent implements OnInit {
         });
     });
     this.isClicked = true;
+  }
+
+  ngOnDestroy () {
+    this.snapshot.unsubscribe();
   }
 }

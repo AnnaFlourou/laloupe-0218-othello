@@ -11,7 +11,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
-import { log } from 'util';
 import { Neighbor } from '../models/neighbor';
 import { Direction } from '../models/direction';
 import { Increment } from '../models/increment';
@@ -68,7 +67,6 @@ export class BoardComponent implements OnInit, OnDestroy {
                       }
                     }
                   }
-
                 });
   }
 
