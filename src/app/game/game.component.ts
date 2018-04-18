@@ -4,7 +4,7 @@ import { Room } from './../models/room';
 import { AuthService } from '../core/auth.service';
 
 import { Router } from '@angular/router';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -18,11 +18,10 @@ import { Subscription } from 'rxjs/Rx';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
 })
-export class GameComponent implements OnInit, OnDestroy {
+export class GameComponent implements OnInit {
 
   isClicked: boolean = false;
   waitMessage: boolean = false;
-  snapshot: Subscription;
 
 
   constructor(private db: AngularFirestore, private router: Router, private auth: AuthService) { }
@@ -39,7 +38,7 @@ export class GameComponent implements OnInit, OnDestroy {
       'rooms',
       ref => ref.where('waiting', '==', true),
     );
-    this.snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
+    const snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
       player.name = this.auth.myId;
 
@@ -71,7 +70,5 @@ export class GameComponent implements OnInit, OnDestroy {
     this.isClicked = true;
   }
 
-  ngOnDestroy() {
-    this.snapshot.unsubscribe();
-  }
+
 }
