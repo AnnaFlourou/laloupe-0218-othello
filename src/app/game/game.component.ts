@@ -19,16 +19,19 @@ import { Subscription } from 'rxjs/Rx';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit, OnDestroy {
+  
+  isClicked: boolean = false;
+  waitMessage: boolean = false;
+  snapshot: Subscription;
+
+
   constructor(private db: AngularFirestore, private router: Router, private auth: AuthService) { }
 
-  snapshot: Subscription;
 
   ngOnInit() {
   }
 
   // function to create rooms, and push a player.name based on a random number. 
-  isClicked: boolean = false;
-  waitMessage: boolean = false;
 
   getRooms() {
     const roomsCollection = this.db.collection<Room>('rooms');
