@@ -66,6 +66,10 @@ export class BoardComponent implements OnInit, OnDestroy {
                         this.scorePlayer2 += 1;
                       }
                     }
+                    if (this.room.quit === true) {
+                      this.turn = 'Your opponent has left the room, You Win.';
+                      this.router.navigate(['game']);
+                    }
                   }
                 });
   }
@@ -267,6 +271,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (this.room.board[x].line[y] === 1) { return 'disc-white'; }
     if (this.room.board[x].line[y] === 2) { return 'disc-black'; }
     if (this.room.board[x].line[y] === 0) { return 'disc-empty'; }
+  }
+
+  quit() {
+    this.room.quit = true;
+    this.updateRoom();
   }
 
   ngOnDestroy() {
