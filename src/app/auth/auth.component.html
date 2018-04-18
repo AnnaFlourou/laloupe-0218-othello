@@ -5,7 +5,7 @@
   </div>
   <div *ngIf="afAuth.authState | async as user; else showLogin">
     <h1>Hello {{ user.displayName }} !</h1>
-    <button class="action-button shadow animate blue" (click)="onLogout()">Logout</button>
+    <button class="action-button shadow animate blue" routerLink="/game">Go To Lobby</button>
   </div>
   <ng-template class="row mx-auto logButton" #showLogin>
     <img (click)="onLogin()" src='./assets/images/btn-google.png' alt="btn-google" />
