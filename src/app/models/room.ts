@@ -15,8 +15,9 @@ export class Room {
     { line: [0, 0, 0, 0, 0, 0, 0, 0] },
   ];
   winner: string;
-  waiting = true;
   chat: string[];
+  waiting:boolean = true;
+  quit: boolean = false;
 }
 
 

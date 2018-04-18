@@ -1,11 +1,18 @@
+@font-face {
+    font-family: 'pacifico';
+    src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
+
+.wait {
+    font-family: 'pacifico';
+}
+
 table {
     margin: 0 auto;
-  
     border: 1px solid #37474F;
     border-collapse: collapse;
     background: rgb(177, 138, 124);
-  
-  }
+}
 
 td {
     min-width: 70px;
@@ -13,41 +20,37 @@ td {
     border: 3px solid #00bfa5;
     width: 70px;
     height: 70px;
-
     max-width: 70px;
     max-height: 70px;
-  }
+}
 
-tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
-  background: #8D6E63;
-  border: 2px solid #00bfa5;
-  border-radius: 15%;
-
-  
+tr:nth-child(odd) td:nth-child(even),
+tr:nth-child(even) td:nth-child(odd) {
+    background: #8D6E63;
+    border: 2px solid #00bfa5;
+    border-radius: 15%;
 }
 
 .disc {
-  display: block;
-
-  border-radius: 50%;
-  height: 60%;
-  width: 60%;
-
-  margin: auto;
+    display: block;
+    border-radius: 50%;
+    height: 60%;
+    width: 60%;
+    margin: auto;
 }
 
 .disc-white {
-  background: white;
-  color: black;
+    background: white;
+    color: black;
 }
 
 .disc-black {
-  background: black;
-  color: white;
+    background: black;
+    color: white;
 }
 
 .disc-suggestion {
-  background: rgba(50, 50, 50, 0.5);
-  width: 10%;
-  height: 10%;
+    background: rgba(50, 50, 50, 0.5);
+    width: 10%;
+    height: 10%;
 }
