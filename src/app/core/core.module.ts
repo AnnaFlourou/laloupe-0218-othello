@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
-import { GamecoreService } from './gamecore.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
@@ -13,6 +12,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [AuthService, GamecoreService],
+  providers: [AuthService],
 })
 export class CoreModule { }
