@@ -33,6 +33,8 @@ export class BoardComponent implements OnInit {
   myPiece: number;
   result: string = '';
   turn: string = '';
+  scorePlayer1: number = 0;
+  scorePlayer2: number = 0;
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
@@ -54,6 +56,18 @@ export class BoardComponent implements OnInit {
         } else {
           this.turn = 'Your turn !';
         }
+        this.scorePlayer1 = 0;
+        this.scorePlayer2 = 0;
+        for (let line = 0; line < 8; line += 1) {
+          for (let col = 0; col < 8; col += 1) {
+            if (this.room.board[line].line[col] === 1) {
+              this.scorePlayer1 += 1;
+            } else if (this.room.board[line].line[col] === 2) {
+              this.scorePlayer2 += 1;
+            }
+          }
+        }
+
       });
   }
 
