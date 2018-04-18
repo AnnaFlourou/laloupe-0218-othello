@@ -29,10 +29,9 @@ export class BoardComponent implements OnInit {
 
   roomId: string;
   room: Room;
-  endGame: boolean;
   ennemyPiece: number;
   myPiece: number;
-  isGameFinish: boolean;
+  result: string = '';
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
@@ -46,6 +45,9 @@ export class BoardComponent implements OnInit {
     this.db.doc<Room>('rooms/' + this.roomId).valueChanges()
       .subscribe((room) => {
         this.room = room;
+        if (this.room.piece === 0) {
+          this.isFinish();
+        }
       });
   }
 
@@ -199,7 +201,6 @@ export class BoardComponent implements OnInit {
 
   isFinish() {
     if (this.room.piece === 0) {
-      this.isGameFinish = true;
       this.isWinner();
     }
   }
@@ -224,27 +225,24 @@ export class BoardComponent implements OnInit {
       this.room.winner = this.room.players[1].name;
     } else {
       this.room.winner = 'No Winner';
-      this.endGame = true;
       return;
     }
 
     if (this.auth.myId === this.room.winner) {
-      alert('YOU WIN');
-    } else { alert('YOU LOOSE'); }
+      this.result = 'You Win !';
+    } else { this.result = 'You Loose !'; }
 
-    this.endGame = true;
   }
 
-
+  
   click(x: number, y: number) {
     this.setPiece(x, y);
     if (!(this.canPlay(x, y))) { return; }
     this.putPiece(x, y);
     this.countPiece();
     this.changeTurn();
-    this.isFinish();
-
     this.updateRoom();
+
 
   }
 
