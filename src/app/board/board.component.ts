@@ -225,6 +225,7 @@ export class BoardComponent implements OnInit {
       this.room.winner = this.room.players[1].name;
     } else {
       this.room.winner = 'No Winner';
+      this.result = 'Draw';
       return;
     }
 
@@ -234,7 +235,6 @@ export class BoardComponent implements OnInit {
 
   }
 
-  
   click(x: number, y: number) {
     this.setPiece(x, y);
     if (!(this.canPlay(x, y))) { return; }
@@ -242,8 +242,6 @@ export class BoardComponent implements OnInit {
     this.countPiece();
     this.changeTurn();
     this.updateRoom();
-
-
   }
 
   getClass(x: number, y: number) {
