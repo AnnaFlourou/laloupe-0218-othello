@@ -1,85 +1,79 @@
 table {
-  margin: 0 auto;
-  border: 1px solid #37474F;
-  border-collapse: collapse;
-  background: rgb(177, 138, 124);
-
+    margin: 0 auto;
+    border: 1px solid #37474F;
+    border-collapse: collapse;
+    background: rgb(177, 138, 124);
 }
 
 td {
-  min-width: 70px;
-  min-height: 70px;
-  border: 3px solid #00bfa5;
-  border-radius: 15%;
-  width: 70px;
-  height: 70px;
-
-  max-width: 70px;
-  max-height: 70px;
+    min-width: 70px;
+    min-height: 70px;
+    border: 3px solid #00bfa5;
+    border-radius: 15%;
+    width: 70px;
+    height: 70px;
+    max-width: 70px;
+    max-height: 70px;
 }
 
-tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd) {
-background: #8D6E63;
-border: 2px solid #00bfa5;
-border-radius: 15%;
+tr:nth-child(odd) td:nth-child(even),
+tr:nth-child(even) td:nth-child(odd) {
+    background: #8D6E63;
+    border: 2px solid #00bfa5;
+    border-radius: 15%;
 }
 
 .disc {
-  display: block;
-  
-  border-radius: 50%;
-  height: 60%;
-  width: 60%;
-  
-  margin: auto;
+    display: block;
+    border-radius: 50%;
+    height: 60%;
+    width: 60%;
+    margin: auto;
 }
-  
+
 .disc-white {
-  background: white;
-  color: black;
-  }
-  
+    background: white;
+    color: black;
+}
+
 .disc-black {
-  background: black;
-  color: white;
-  }
+    background: black;
+    color: white;
+}
 
 /*play button*/
-.animate
-{
-	transition: all 0.1s;
-	-webkit-transition: all 0.1s;
+
+.animate {
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
 }
 
-.action-button
-{
-	position: relative;
-	margin-top: 5%;
-	border-radius: 10px;
-	font-family: 'Pacifico', cursive;
-	font-size: 35px;
-	color: #FFF;
-  text-decoration: none;
-  animation: bounce 2s ease infinite;	
-}
-.action-btn
-{
-	position: relative;
-	margin-top: 5%;
-	border-radius: 10px;
-	font-family: 'Pacifico', cursive;
-	font-size: 35px;
-	color: #FFF;
-  text-decoration: none;
-  
+.action-button {
+    position: relative;
+    margin-top: 5%;
+    border-radius: 10px;
+    font-family: 'Pacifico', cursive;
+    font-size: 35px;
+    color: #FFF;
+    text-decoration: none;
 }
 
-.green
-{
-	background-color: #8D6E63;
-	border-bottom: 5px solid #00bfa5;
-	text-shadow: 0px -2px #8D6E63;
+.action-btn {
+    position: relative;
+    margin-top: 5%;
+    border-radius: 10px;
+    font-family: 'Pacifico', cursive;
+    font-size: 35px;
+    color: #FFF;
+    text-decoration: none;
 }
-.action-button:hover{
-  animation: display;
+
+.green {
+    background-color: #8D6E63;
+    border-bottom: 5px solid #00bfa5;
+    text-shadow: 0px -2px #8D6E63;
+}
+
+.action-button:hover {
+    animation: display;
 }
