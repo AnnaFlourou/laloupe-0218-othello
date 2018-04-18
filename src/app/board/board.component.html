@@ -1,5 +1,5 @@
 <p>{{result}}</p>
-<p>{{turn}}</p>
+<p *ngIf="!result">{{turn}}</p>
 <p>Player 1: {{scorePlayer1}} -- player 2: {{scorePlayer2}}</p>
 <table class=" text-center" *ngIf="room">
   <tr *ngFor="let lines of room.board; let x = index">
