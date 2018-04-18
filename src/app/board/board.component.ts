@@ -32,6 +32,7 @@ export class BoardComponent implements OnInit {
   ennemyPiece: number;
   myPiece: number;
   result: string = '';
+  turn: string = '';
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
@@ -196,6 +197,11 @@ export class BoardComponent implements OnInit {
 
   changeTurn(x: number = 0) {
     this.room.turn = this.auth.myId;
+    if (this.room.turn === this.auth.myId) {
+      this.turn = 'Opponent turn';
+    } else {
+      this.turn = 'Your turn';
+    }
     if (x === 1) { this.updateRoom(); }
   }
 

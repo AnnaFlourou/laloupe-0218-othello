@@ -1,4 +1,5 @@
 <p>{{result}}</p>
+<p>{{turn}}</p>
 <table class=" text-center" *ngIf="room">
   <tr *ngFor="let lines of room.board; let x = index">
     <ng-template [ngIf]="room.turn != auth.myId">
