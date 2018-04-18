@@ -67,7 +67,6 @@ export class BoardComponent implements OnInit, OnDestroy {
                       }
                     }
                     if (this.room.quit === true) {
-                      this.turn = 'Your opponent has left the room, You Win.';
                       this.router.navigate(['game']);
                     }
                   }
