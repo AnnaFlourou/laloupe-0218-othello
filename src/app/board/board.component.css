@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'pacifico';
+    src: url('../../assets/fonts/pacifico/pacifico.ttf');
+}
+
 table {
     margin: 0 auto;
     border: 1px solid #37474F;
@@ -76,4 +81,20 @@ tr:nth-child(even) td:nth-child(odd) {
 
 .action-button:hover {
     animation: display;
+}
+
+.instructions {
+    font-family: 'pacifico';
+    font-size: 1.6rem;
+}
+
+.pl1 {
+    color: white;
+    text-shadow: 0px 2px #00bfa5, 2px 0px #00bfa5, 0px -2px #00bfa5, -2px 0px #00bfa5;
+}
+
+.pl2 {
+    color: white;
+    text-shadow: 0px 2px #8D6E63, 2px 0px #8D6E63, 0px -2px #8D6E63, -2px 0px #8D6E63;
+    ;
 }
