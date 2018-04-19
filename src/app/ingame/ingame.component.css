@@ -24,7 +24,7 @@
     text-align: center;
     border: 1px solid #b18a7c;
     border-radius: 5px;
-    height: 40%;
+    height: 35%;
     width: 20%;
 }
 
@@ -42,11 +42,11 @@
 
 .chat {
     background-color: #f5f5f5;
+    border: 2.5px dotted #b18a7c;
     position: absolute;
     left: 80%;
-    top: 40%;
+    top: 36%;
     text-align: center;
-    border: 2.5px dotted #b18a7c;
     border-radius: 5px;
     height: 5%;
     width: 20%;
