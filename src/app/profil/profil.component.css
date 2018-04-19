@@ -6,7 +6,7 @@
 .username {
     font-family: 'pacifico', Arial, Helvetica, sans-serif;
     font-size: 1.9rem;
-    margin-top: 20%;
+    margin-top: 7%;
 }
 
 .avatar {
@@ -44,7 +44,7 @@ h1 {
 
 .action-button {
     position: relative;
-    margin-top: 20px;
+    margin-top: 15px;
     border-radius: 10px;
     font-family: 'Pacifico', Arial, Helvetica, sans-serif;
     font-size: 25px;

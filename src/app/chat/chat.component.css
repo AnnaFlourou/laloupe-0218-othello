@@ -11,7 +11,7 @@
 }
 
 .chatbox {
-    max-height: 500px;
+    max-height: 420px;
     font-family: 'pacifico', Arial, Helvetica, sans-serif;
     overflow-y: scroll;
     font-size: 1.3rem;
