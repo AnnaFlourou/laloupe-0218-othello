@@ -16,7 +16,7 @@ export class Room {
   ];
   winner: string;
   waiting = true;
-  chat: string[];
+  chat: string[] = [''];
 }
 
 

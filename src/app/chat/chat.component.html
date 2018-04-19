@@ -4,5 +4,5 @@
         {{item}}
     </p>
 </div>
-<input [(ngModel)]="message" (keyup.enter)="chat()">
+<input [(ngModel)]="message" onfocus="this.value=''" (keyup.enter)="chat()">
 <button (click)="chat()">Envoyer</button>
