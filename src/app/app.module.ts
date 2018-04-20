@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 // Own Module
 import { CoreModule } from './core/core.module';
@@ -60,6 +61,7 @@ const appRoutes: Routes = [
     AngularFireStorageModule,
     AngularFirestoreModule,
     CoreModule,
+    FormsModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

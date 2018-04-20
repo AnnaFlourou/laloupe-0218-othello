@@ -1,1 +1,8 @@
 <p class="chat_title">chat Box</p>
+<div class="chatbox" *ngIf="chatBox">
+    <p *ngFor="let item of chatBox">
+        {{item}}
+    </p>
+</div>
+<input [(ngModel)]="message" onfocus="this.value=''" (keyup.enter)="chat()">
+<button class="action-button shadow animate blue" (click)="chat()">send</button>

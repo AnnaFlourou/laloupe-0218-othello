@@ -1,3 +1,12 @@
+<div class="row instructions">
+  <p class="offset-2 col-4" *ngIf="result">{{result}}</p>
+  <p class="offset-2 col-4" *ngIf="!result">{{turn}}</p>
+  <p>
+    <span class="pl1">Player 1 </span>: {{scorePlayer1}}
+    <span class=pl1>-</span>
+    <span class="pl2">-</span>
+    <span class="pl2">player 2 </span>: {{scorePlayer2}}</p>
+</div>
 <table class=" text-center" *ngIf="room">
   <tr *ngFor="let lines of room.board; let x = index">
     <ng-template [ngIf]="room.turn != auth.myId">
@@ -13,5 +22,5 @@
   </tr>
 </table>
 
-<button *ngIf="!isGameFinish" class='action-btn shadow animate green' (click)="changeTurn(1)">Pass</button>
-<button *ngIf="isGameFinish" class='action-button shadow animate green' routerLink="/game">Quit</button>
+<button class='action-btn shadow animate green' (click)="changeTurn(1)">Pass</button>
+<button class='action-button shadow animate green' (click)="quit()">Quit</button>

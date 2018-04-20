@@ -1,23 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Player } from './../models/player';
 import { Room } from './../models/room';
 
 import { AuthService } from '../core/auth.service';
-import { GamecoreService } from '../core/gamecore.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
-import { log } from 'util';
 import { Neighbor } from '../models/neighbor';
 import { Direction } from '../models/direction';
 import { Increment } from '../models/increment';
 import { Position } from '../models/position';
+import { Subscription } from 'rxjs/Rx';
 
 
 
@@ -26,29 +24,53 @@ import { Position } from '../models/position';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css'],
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
   roomId: string;
   room: Room;
-  endGame: boolean;
   ennemyPiece: number;
   myPiece: number;
-  isGameFinish: boolean;
+  result: string = '';
+  turn: string = '';
+  scorePlayer1: number = 0;
+  scorePlayer2: number = 0;
+  subscription: Subscription;
 
   constructor(private auth: AuthService,
               private db: AngularFirestore,
               private router: Router,
-              private route: ActivatedRoute,
-              private gamecore: GamecoreService) {
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.roomId = this.route.snapshot.paramMap.get('id');
 
-    this.db.doc<Room>('rooms/' + this.roomId).valueChanges()
-      .subscribe((room) => {
-        this.room = room;
-      });
+    this.subscription = this.db.doc<Room>('rooms/' + this.roomId).valueChanges()
+                .subscribe((room) => {
+                  this.room = room;
+                  if (this.room.piece === 0) {
+                    this.isFinish();
+                  }
+                  if (this.room.turn === this.auth.myId) {
+                    this.turn = 'Opponent turn !';
+                  } else {
+                    this.turn = 'Your turn !';
+                  }
+                  this.scorePlayer1 = 0;
+                  this.scorePlayer2 = 0;
+                  for (let line = 0; line < 8; line += 1) {
+                    for (let col = 0; col < 8; col += 1) {
+                      if (this.room.board[line].line[col] === 1) {
+                        this.scorePlayer1 += 1;
+                      } else if (this.room.board[line].line[col] === 2) {
+                        this.scorePlayer2 += 1;
+                      }
+                    }
+                    if (this.room.quit) {
+                      this.router.navigate(['game']);
+                    }
+                  }
+                });
   }
 
   updateRoom() {
@@ -145,9 +167,8 @@ export class BoardComponent implements OnInit {
     for (const ennemy of opponentNeighbors) {
       const list = [ennemy];
       let trigger = true;
-      console.log('1');
+
       while (trigger) {
-        console.log('2');
         const lastOpponent = this.getNeighbor(list[list.length - 1].position.x,
                                               list[list.length - 1].position.y,
                                               list[list.length - 1].direction);
@@ -156,11 +177,10 @@ export class BoardComponent implements OnInit {
           if (this.room.board[lastOpponent.position.x].
             line[lastOpponent.position.y] === this.ennemyPiece) {
             list.push(lastOpponent);
-            console.log('toto : ', list);
+
           } else if (this.room.board[lastOpponent.position.x]
             .line[lastOpponent.position.y] === this.myPiece) {
             for (const changeEnnemy of list) {
-              console.log('3');
               this.room.board[changeEnnemy.position.x].line[changeEnnemy.position.y] = this.myPiece;
               count += 1;
               trigger = false;
@@ -174,7 +194,6 @@ export class BoardComponent implements OnInit {
 
     count !== 0 ? canIPlay = true : canIPlay = false;
 
-    console.log(opponentNeighbors);
     return canIPlay;
 
   }
@@ -204,7 +223,6 @@ export class BoardComponent implements OnInit {
 
   isFinish() {
     if (this.room.piece === 0) {
-      this.isGameFinish = true;
       this.isWinner();
     }
   }
@@ -229,17 +247,15 @@ export class BoardComponent implements OnInit {
       this.room.winner = this.room.players[1].name;
     } else {
       this.room.winner = 'No Winner';
-      this.endGame = true;
+      this.result = 'Draw';
       return;
     }
 
     if (this.auth.myId === this.room.winner) {
-      alert('YOU WIN');
-    } else { alert('YOU LOOSE'); }
+      this.result = 'You Win !';
+    } else { this.result = 'You Loose !'; }
 
-    this.endGame = true;
   }
-
 
   click(x: number, y: number) {
     this.setPiece(x, y);
@@ -247,16 +263,22 @@ export class BoardComponent implements OnInit {
     this.putPiece(x, y);
     this.countPiece();
     this.changeTurn();
-    this.isFinish();
-
     this.updateRoom();
-
   }
 
   getClass(x: number, y: number) {
     if (this.room.board[x].line[y] === 1) { return 'disc-white'; }
     if (this.room.board[x].line[y] === 2) { return 'disc-black'; }
     if (this.room.board[x].line[y] === 0) { return 'disc-empty'; }
+  }
+
+  quit() {
+    this.room.quit = true;
+    this.updateRoom();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

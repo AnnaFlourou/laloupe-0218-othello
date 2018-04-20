@@ -9,9 +9,9 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
 import * as firebase from 'firebase/app';
 import { DocumentSnapshot } from '@firebase/firestore-types';
+import { Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-game',
@@ -19,6 +19,11 @@ import { DocumentSnapshot } from '@firebase/firestore-types';
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
+
+  isClicked: boolean = false;
+  waitMessage: boolean = false;
+
+
   constructor(private db: AngularFirestore, private router: Router, private auth: AuthService) { }
 
 
@@ -26,11 +31,13 @@ export class GameComponent implements OnInit {
   }
 
   // function to create rooms, and push a player.name based on a random number. 
-  isClicked: boolean = false;
-  waitMessage: boolean = false;
 
   getRooms() {
-    const roomsCollection = this.db.collection<Room>('rooms');
+
+    const roomsCollection = this.db.collection<Room>(
+      'rooms',
+      ref => ref.where('waiting', '==', true),
+    );
     const snapshot = roomsCollection.snapshotChanges().take(1).subscribe((snapshot) => {
       const player = new Player();
       player.name = this.auth.myId;
@@ -40,6 +47,7 @@ export class GameComponent implements OnInit {
         const room = snapshotItem.payload.doc.data() as Room;
         if (room.players.length === 1) {
           room.players.push(player);
+          room.waiting = false;
           room.turn = room.players[1].name;
           this.db.doc('rooms/' + roomId).update(JSON.parse(JSON.stringify(room)));
           this.router.navigate(['ingame', roomId, player.name]);
@@ -61,4 +69,6 @@ export class GameComponent implements OnInit {
     });
     this.isClicked = true;
   }
+
+
 }
